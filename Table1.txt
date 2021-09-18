@@ -12,3 +12,11 @@ CREATE TABLE IF NOT EXISTS
 	track (id serial PRIMARY KEY, NAME VARCHAR(100) 
 	NOT NULL, albums_id INTEGER REFERENCES albums(id)
 );
+
+ALTER TABLE 
+	public.albums ADD COLUMN year VARCHAR (100)
+;
+  
+ALTER TABLE 
+	public.track ADD COLUMN duration VARCHAR (100)
+;
