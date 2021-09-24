@@ -1,22 +1,20 @@
-CREATE TABLE IF NOT EXISTS 
-	singers (id serial PRIMARY KEY, NAME VARCHAR(100) 
-	NOT NULL unique
+CREATE TABLE IF NOT EXISTS artist (
+	id_artist SERIAL PRIMARY key,
+	Name VARCHAR(50) NOT NULL unique,
+	id_genre INTEGER NOT NULL unique
 );
-
-CREATE TABLE IF NOT EXISTS 
-	albums (id serial PRIMARY KEY, NAME VARCHAR(100) 
-	NOT NULL, singers_id INTEGER REFERENCES singers(id)
+CREATE TABLE IF NOT EXISTS Album (
+	id_album SERIAL PRIMARY key,
+	Name_album VARCHAR(100)  NOT NULL, 
+	year_release INTEGER NOT NULL,
 );
-
-CREATE TABLE IF NOT EXISTS 
-	track (id serial PRIMARY KEY, NAME VARCHAR(100) 
-	NOT NULL, albums_id INTEGER REFERENCES albums(id)
+CREATE TABLE IF NOT EXISTS Track (
+	id_track SERIAL PRIMARY key,
+	name_тrack VARCHAR(100)  NOT NULL,
+	duration INTEGER NOT NULL,
 );
-
-ALTER TABLE 
-	public.albums ADD COLUMN year VARCHAR (100)
-;
-  
-ALTER TABLE 
-	public.track ADD COLUMN duration VARCHAR (100)
-;
+CREATE TABLE IF NOT EXISTS Gener (
+	id_genre SERIAL PRIMARY key,
+	Title_track VARCHAR(100)  NOT NULL UNIQUE
+);
+ALTER TABLE performers ADD CONSTRAINT id_genre FOREIGN KEY (id_genre) REFERENCES genres(id_genre);
