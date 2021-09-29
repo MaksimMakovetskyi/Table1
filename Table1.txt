@@ -1,20 +1,39 @@
-CREATE TABLE IF NOT EXISTS artist (
+CREATE TABLE IF NOT EXISTS artists (
 	id_artist SERIAL PRIMARY key,
-	Name VARCHAR(50) NOT NULL unique,
+	name VARCHAR(50) NOT NULL unique,
 	id_genre INTEGER NOT NULL unique
 );
-CREATE TABLE IF NOT EXISTS Album (
+CREATE TABLE IF NOT EXISTS albums (
 	id_album SERIAL PRIMARY key,
-	Name_album VARCHAR(100)  NOT NULL, 
+	name_album VARCHAR(100)  NOT NULL, 
 	year_release INTEGER NOT NULL,
 );
-CREATE TABLE IF NOT EXISTS Track (
+CREATE TABLE IF NOT EXISTS tracks (
 	id_track SERIAL PRIMARY key,
-	name_тrack VARCHAR(100)  NOT NULL,
+	name_track VARCHAR(100)  NOT NULL,
 	duration INTEGER NOT NULL,
 );
-CREATE TABLE IF NOT EXISTS Gener (
+CREATE TABLE IF NOT EXISTS genres (
 	id_genre SERIAL PRIMARY key,
-	Title_track VARCHAR(100)  NOT NULL UNIQUE
+	name_genre VARCHAR(100)  NOT NULL UNIQUE
 );
-ALTER TABLE performers ADD CONSTRAINT id_genre FOREIGN KEY (id_genre) REFERENCES genres(id_genre);
+
+ALTER TABLE artists ADD CONSTRAINT id_genre FOREIGN KEY (id_genre) REFERENCES genre(id_genre);
+
+ALTER TABLE artists DROP COLUMN id_genre;
+
+CREATE TABLE IF NOT EXISTS genres_artits (
+	id_genre INTEGER REFERENCES genres(id_genre) NOT NULL,
+	id_artist INTEGER REFERENCES Artists(id_artist) NOT NULL
+);	
+CREATE TABLE IF NOT EXISTS albums_artists (
+	id_album INTEGER REFERENCES albums(id_album) NOT NULL,
+	id_artist INTEGER REFERENCES artists(id_artist) NOT NULL
+);	
+CREATE TABLE IF NOT EXISTS collections (
+	id_collection SERIAL PRIMARY key,
+	name_collection VARCHAR(100)  NOT NULL, 
+	year_release INTEGER NOT NULL,
+	id_track INTEGER REFERENCES tracks(id_track) NOT NULL,
+	id_album INTEGER REFERENCES albums(id_album) NOT NULL
+);
