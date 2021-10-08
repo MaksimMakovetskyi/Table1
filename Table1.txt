@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS artists (
 	id_artist SERIAL PRIMARY key,
-	name VARCHAR(50) NOT NULL unique,
+	name VARCHAR(100) NOT NULL unique,
 	id_genre INTEGER NOT NULL unique
 );
 CREATE TABLE IF NOT EXISTS albums (
@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS albums (
 CREATE TABLE IF NOT EXISTS tracks (
 	id_track SERIAL PRIMARY key,
 	name_track VARCHAR(100)  NOT NULL,
+	id_album INTEGER NOT NULL unique
 	duration INTEGER NOT NULL,
 );
 CREATE TABLE IF NOT EXISTS genres (
