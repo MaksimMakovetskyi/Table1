@@ -34,6 +34,5 @@ CREATE TABLE IF NOT EXISTS albums_artists (
 CREATE TABLE IF NOT EXISTS collections (
 	id_collection SERIAL PRIMARY key,
 	name_collection VARCHAR(100)  NOT NULL, 
-	year_release INTEGER NOT NULL,
-	id_track INTEGER REFERENCES tracks(id_track) NOT NULL
+	year_release INTEGER NOT NULL
 );
