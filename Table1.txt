@@ -6,13 +6,14 @@ CREATE TABLE IF NOT EXISTS artists (
 CREATE TABLE IF NOT EXISTS albums (
 	id_album SERIAL PRIMARY key,
 	name_album VARCHAR(100)  NOT NULL, 
-	year_release INTEGER NOT NULL,
+	year_release VARCHAR(100) NOT NULL,
+	id_artist INTEGER REFERENCES artists(id_artist) NOT NULL
 );
 CREATE TABLE IF NOT EXISTS tracks (
 	id_track SERIAL PRIMARY key,
 	name_track VARCHAR(100)  NOT NULL,
-	id_album INTEGER NOT NULL unique
-	duration INTEGER NOT NULL,
+	id_album INTEGER REFERENCES albums(id_album) NOT NULL,
+	duration VARCHAR(50) NOT NULL
 );
 CREATE TABLE IF NOT EXISTS genres (
 	id_genre SERIAL PRIMARY key,
@@ -22,6 +23,7 @@ CREATE TABLE IF NOT EXISTS genres (
 ALTER TABLE artists ADD CONSTRAINT id_genre FOREIGN KEY (id_genre) REFERENCES genre(id_genre);
 
 ALTER TABLE artists DROP COLUMN id_genre;
+ALTER TABLE albums DROP COLUMN id_artist;
 
 CREATE TABLE IF NOT EXISTS genres_artits (
 	id_genre INTEGER REFERENCES genres(id_genre) NOT NULL,
