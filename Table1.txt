@@ -1,44 +1,42 @@
-CREATE TABLE IF NOT EXISTS artists (
+CREATE TABLE IF NOT EXISTS Исполнители (
 	id_artist SERIAL PRIMARY key,
-	name VARCHAR(100) NOT NULL unique,
+	Имя VARCHAR(50) NOT NULL unique,
 	id_genre INTEGER NOT NULL unique
 );
-CREATE TABLE IF NOT EXISTS albums (
+CREATE TABLE IF NOT EXISTS Альбомы (
 	id_album SERIAL PRIMARY key,
-	name_album VARCHAR(100)  NOT NULL, 
-	year_release VARCHAR(100) NOT NULL,
-	id_artist INTEGER REFERENCES artists(id_artist) NOT NULL
+	Название_альбома VARCHAR(100)  NOT NULL, 
+	Год_выпуска VARCHAR(4) NOT NULL,
+	id_artist INTEGER REFERENCES Исполнители(id_artist) NOT NULL
 );
-CREATE TABLE IF NOT EXISTS tracks (
+CREATE TABLE IF NOT EXISTS Треки (
 	id_track SERIAL PRIMARY key,
-	name_track VARCHAR(100)  NOT NULL,
-	id_album INTEGER REFERENCES albums(id_album) NOT NULL,
-	duration VARCHAR(50) NOT NULL,
-	id_collection NOT NULL
+	Название_трека VARCHAR(100)  NOT NULL,
+	Длительность VARCHAR(10) NOT NULL,
+	id_album INTEGER REFERENCES Альбомы(id_album) NOT NULL
 );
-CREATE TABLE IF NOT EXISTS genres (
+CREATE TABLE IF NOT EXISTS Жанры (
 	id_genre SERIAL PRIMARY key,
-	name_genre VARCHAR(100)  NOT NULL UNIQUE
+	Название_жанра VARCHAR(100)  NOT NULL UNIQUE
 );
-ALTER TABLE artists ADD CONSTRAINT id_genre FOREIGN KEY (id_genre) REFERENCES genre(id_genre);
-ALTER TABLE artists DROP COLUMN id_genre;
-ALTER TABLE albums DROP COLUMN id_artist;
+ALTER TABLE Исполнители ADD CONSTRAINT id_genre FOREIGN KEY (id_genre) REFERENCES Жанры(id_genre);
+ALTER TABLE Исполнители DROP COLUMN id_genre;
+ALTER TABLE Альбомы DROP COLUMN id_artist;
 
-CREATE TABLE IF NOT EXISTS collections_artits (
-	id_collection INTEGER REFERENCES collections(id_collection) NOT NULL,
-	id_artist INTEGER REFERENCES artists(id_artist) NOT NULL
-);
-CREATE TABLE IF NOT EXISTS genres_artits (
-	id_genre INTEGER REFERENCES genres(id_genre) NOT NULL,
-	id_artist INTEGER REFERENCES artists(id_artist) NOT NULL
+CREATE TABLE IF NOT EXISTS Жанры_Исполнители (
+	id_genre INTEGER REFERENCES Жанры(id_genre) NOT null,
+	id_artist INTEGER REFERENCES Исполнители(id_artist) NOT null
 );	
-CREATE TABLE IF NOT EXISTS albums_artists (
-	id_album INTEGER REFERENCES albums(id_album) NOT NULL,
-	id_artist INTEGER REFERENCES artists(id_artist) NOT NULL
+CREATE TABLE IF NOT EXISTS Альбомы_Исполнители (
+	id_album INTEGER REFERENCES Альбомы(id_album) NOT null,
+	id_artist INTEGER REFERENCES Исполнители(id_artist) NOT null
 );	
-CREATE TABLE IF NOT EXISTS collections (
+CREATE TABLE IF NOT EXISTS Сборники (
 	id_collection SERIAL PRIMARY key,
-	name_collection VARCHAR(100)  NOT NULL, 
-	year_release INTEGER NOT NULL,
-	id_track INTEGER NOT NULL
+	Название_сборника VARCHAR(100)  NOT NULL, 
+	Год_выпуска VARCHAR(4) NOT NULL,
 );
+CREATE TABLE IF NOT EXISTS Сборники_Треки (
+	id_collection INTEGER REFERENCES Сборники(id_collection) NOT null,
+	id_track INTEGER REFERENCES Треки(id_track) NOT null
+);	
