@@ -38,5 +38,6 @@ CREATE TABLE IF NOT EXISTS Сборники (
 );
 CREATE TABLE IF NOT EXISTS Сборники_Треки (
 	id_collection INTEGER REFERENCES Сборники(id_collection) NOT null,
-	id_track INTEGER REFERENCES Треки(id_track) NOT null
+	id_track INTEGER REFERENCES Треки(id_track) NOT null,
+	primary key(id_collection, id_track)
 );	
