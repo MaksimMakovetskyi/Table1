@@ -25,11 +25,13 @@ ALTER TABLE Альбомы DROP COLUMN id_artist;
 
 CREATE TABLE IF NOT EXISTS Жанры_Исполнители (
 	id_genre INTEGER REFERENCES Жанры(id_genre) NOT null,
-	id_artist INTEGER REFERENCES Исполнители(id_artist) NOT null
+	id_artist INTEGER REFERENCES Исполнители(id_artist) NOT null,
+	primary key(id_genre, id_artist)
 );	
 CREATE TABLE IF NOT EXISTS Альбомы_Исполнители (
 	id_album INTEGER REFERENCES Альбомы(id_album) NOT null,
-	id_artist INTEGER REFERENCES Исполнители(id_artist) NOT null
+	id_artist INTEGER REFERENCES Исполнители(id_artist) NOT null,
+	primary key(id_album, id_artist)
 );	
 CREATE TABLE IF NOT EXISTS Сборники (
 	id_collection SERIAL PRIMARY key,
